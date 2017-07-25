@@ -24,7 +24,7 @@ class App extends React.Component{
       <div className="container">
         <h1>Liste des courses</h1>
         <Form formTile="Ajouter un article"  addArticle={this.props.addArticle}/>
-        <ItemList articles ={this.props.articles} />
+        <ItemList articles ={this.props.articles} editArticle ={this.props.editArticle} />
 
       </div>
     )
@@ -38,16 +38,26 @@ const addArticleActionCreator = (article) =>{
     } 
   };
 
+  const editArticleActionCreator = (article) =>{
+    return{
+      type: 'EDIT_ARTICLE', 
+      payload: article
+    } 
+  };
+
 const mapStateToProps = (state) =>{
   return{
     articles: state.articles
   }
-}
+};
 
 const mapDispatchToProps = (dispatch) =>{
     return{
       addArticle: (article) => {
         dispatch(addArticleActionCreator(article));
+      },
+      editArticle: (article) => {
+        dispatch(editArticleActionCreator(article));
       }
     }
   }
